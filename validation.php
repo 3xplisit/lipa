@@ -21,3 +21,4 @@
     fclose($log);
     
     echo $response;
+?>
