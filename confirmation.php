@@ -1,5 +1,6 @@
-<?php
-   header('Content-Type: application/json');
+include '../functions/db_conx.php';
+    
+    header('Content-Type: application/json');
     
     $response = '{
         "ResultCode": 0,
@@ -12,10 +13,18 @@
     
     //log the response
     $logFile = "MCResponse.txt";
-    $log = file_put_contents($logFile,FILE_APPEND);
-    $jsonmCResponse = json_decode($mCResponse, true);
+    $array = json_decode($mCResponse);
     
-   
-    
-    echo $response;
-    ?>
+    $TransactionType= $array->TransactionType;
+    $TransID= $array->TransID;
+    $TransTime = $array->TransTime;
+    $TransAmount =  $array->TransAmount;
+    $BusinessShortCode =   $array->BusinessShortCode;
+    $BillRefNumber =   $array->BillRefNumber;
+    $InvoiceNumber =   $array->InvoiceNumber;
+    $OrgAccountBalance =   $array->OrgAccountBalance;
+    $ThirdPartyTransID =   $array->ThirdPartyTransID;
+    $MSISDN =   $array->MSISDN;
+    $FirstName =   $array->FirstName;
+    $MiddleName =   $array->MiddleName;
+    $LastName =   $array->LastName;
