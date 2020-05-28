@@ -1,11 +1,11 @@
-<?php
+ <?php
     
-    $consumerKey = 'm3qobmc558bRtseVZQZqE15m27RcVEvc';
-    $consumerSecret = 'FJvoVG6W6xuLxMip';
+    $consumerKey = '';
+    $consumerSecret = '';
     
     $headers = ['Content-Type:application/json; charset=utf8'];
 
-    $access_token_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+    $access_token_url = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
      
     $curl = curl_init($access_token_url);
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -20,19 +20,19 @@
     curl_close($curl);
     
     
-  $register_url = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
+  $register_url = 'https://api.safaricom.co.ke/mpesa/c2b/v1/registerurl';
   
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $register_url);
-  curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer ACCESS_TOKEN')); //setting custom header
+  curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.$access_token)); //setting custom header
   
   
   $curl_post_data = array(
     //Fill in the request parameters with valid values
-    'ShortCode' => '602950',
-    'ResponseType' => 'Completed',
-    'ConfirmationURL' => 'https://mywebsite.co.ke/payments/confirmation.php',
-    'ValidationURL' => 'https://mywebsite.co.ke/payments/validation.php'
+    'ShortCode' => '123456',
+    'ResponseType' => 'Cancelled',
+    'ConfirmationURL' => 'https://website.co.ke/Admin/payments/confirmation.php',
+    'ValidationURL' => 'https://website.co.ke/Admin/payments/validation.php'
   );
   
   $data_string = json_encode($curl_post_data);
