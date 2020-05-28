@@ -1,31 +1,18 @@
 <?php
 include '../functions/db_conx.php';
     
-    header('Content-Type: application/json');
-    
-    $response = '{
-        "ResultCode": 0,
-        "ResultDesc": "Confirmation received successfully"
-    }';
-    
-    
-    //DATA
-    $mCResponse = file_get_contents('php://input');
-    
-    //log the response
-    $logFile = "MCResponse.txt";
-    $array = json_decode($mCResponse);
-    
-    $TransactionType= $array->TransactionType;
-    $TransID= $array->TransID;
-    $TransTime = $array->TransTime;
-    $TransAmount =  $array->TransAmount;
-    $BusinessShortCode =   $array->BusinessShortCode;
-    $BillRefNumber =   $array->BillRefNumber;
-    $InvoiceNumber =   $array->InvoiceNumber;
-    $OrgAccountBalance =   $array->OrgAccountBalance;
-    $ThirdPartyTransID =   $array->ThirdPartyTransID;
-    $MSISDN =   $array->MSISDN;
-    $FirstName =   $array->FirstName;
-    $MiddleName =   $array->MiddleName;
-    $LastName =   $array->LastName;
+header('Content-Type: application/json');
+
+$response = json_encode(['ResultCode'=>0,'ResultDesc'=>'Confirmation Received Successfully']);
+
+//Capture the Data
+$mCResponse = file_get_contents('php://input');
+
+//Log the data in a file...
+$logData = file_put_contents(date('Y-m-d').'_Confirmation.log',$mCResponse,FILE_APPEND|LOCK_EX);
+
+//Log the response here....
+$array = json_decode($mCResponse);
+
+//Respond to the Gateway here..
+echo $response;
