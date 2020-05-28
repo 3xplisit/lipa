@@ -2,23 +2,11 @@
     
     header('Content-Type: application/json');
     
-    $response = '{
-        "ResultCode": 0,
-        "ResultDesc": "Validated successfully"
-    }';
-    
+    $response = json_encode(['ResultCode'=>0,'ResultDesc'=>'Validation Passed Successfully','ThirdPartyTransID'=>mt_rand(111111,9999999)]);
     //DATA
     $mValResponse = file_get_contents('php://input');
-    
     //log the response
-    $logFile = "MVResponse.txt";
-    $jsonMValResponse = json_decode($mValResponse, true);
-    
-    //write to file
-    $log = fopen($logFile, "a");
-    
-    fwrite($log, $mValResponse);
-    fclose($log);
-    
+    file_put_contents(date('Y-m-d').'_Validation.log',$mValResponse,FILE_APPEND|LOCK_EX);
+
     echo $response;
 ?>
