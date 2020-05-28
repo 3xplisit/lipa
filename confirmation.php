@@ -1,3 +1,4 @@
+<?php
 include '../functions/db_conx.php';
     
     header('Content-Type: application/json');
